@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -46,14 +47,14 @@ func main() {
 	// Schedule health check to run every minute
 	_, err := c.AddFunc("@every 2s", func() {
 		if err := healthCheck("http://localhost:9900"); err != nil {
-			fmt.Printf("Error in health check: %v\n", err)
+			log.Printf("Error in health check: %v\n", err)
 		} else {
-			fmt.Printf("Health check successful at %v\n", time.Now().Format(time.RFC3339))
+			log.Printf("Health check successful at %v\n", time.Now().Format(time.RFC3339))
 		}
 	})
 
 	if err != nil {
-		panic(fmt.Sprintf("Failed to schedule health check: %v", err))
+		panic("Failed to schedule health check: " + err.Error())
 	}
 
 	// Start cron
