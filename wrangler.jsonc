@@ -26,7 +26,8 @@
       "name": "worker-go",
       "route": "https://worker-go.js910924.workers.dev",
       "vars": {
-        "ENVIRONMENT": "production"
+        "ENVIRONMENT": "production",
+        "SERVER_URL": "https://worker-go.js910924.workers.dev"
       }
     }
   }
