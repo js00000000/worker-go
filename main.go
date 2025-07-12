@@ -48,6 +48,7 @@ func main() {
 	// Get server URL from environment variable or use default
 	serverURL := os.Getenv("SERVER_URL")
 	if serverURL == "" {
+		log.Println("SERVER_URL environment variable is not set, using default")
 		serverURL = "http://localhost:9900"
 	}
 	log.Printf("Using server URL: %s\n", serverURL)
