@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/robfig/cron/v3"
@@ -44,9 +45,16 @@ func main() {
 	// Initialize cron
 	c := cron.New()
 
-	// Schedule health check to run every minute
+	// Get server URL from environment variable or use default
+	serverURL := os.Getenv("SERVER_URL")
+	if serverURL == "" {
+		serverURL = "http://localhost:9900"
+	}
+	log.Printf("Using server URL: %s\n", serverURL)
+
+	// Schedule health check to run every 2 seconds
 	_, err := c.AddFunc("@every 2s", func() {
-		if err := healthCheck("http://localhost:9900"); err != nil {
+		if err := healthCheck(serverURL); err != nil {
 			log.Printf("Error in health check: %v\n", err)
 		} else {
 			log.Printf("Health check successful at %v\n", time.Now().Format(time.RFC3339))

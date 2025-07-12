@@ -12,5 +12,22 @@
       "invocation_logs": true,
       "head_sampling_rate": 1
     }
+  },
+  "dev": {
+    "ip": "localhost",
+    "port": 9900,
+    "local_protocol": "http"
+  },
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
+  "env": {
+    "production": {
+      "name": "worker-go",
+      "route": "https://worker-go.js910924.workers.dev",
+      "vars": {
+        "ENVIRONMENT": "production"
+      }
+    }
   }
 }
